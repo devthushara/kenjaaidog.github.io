@@ -126,11 +126,12 @@
                     </div>
                 </div>
 
+                <!-- VIDEO CONTAINER -->
                 <div id="hero-video" class="relative max-w-5xl mx-auto rounded-xl md:rounded-2xl shadow-xl md:shadow-2xl overflow-hidden border-4 md:border-8 border-white bg-gray-900 aspect-video group cursor-pointer scroll-mt-24 md:scroll-mt-32">
-                    <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
                         <div class="w-16 h-16 md:w-20 md:h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"><i data-lucide="play" class="w-6 h-6 md:w-8 md:h-8 text-white ml-1"></i></div>
                     </div>
-                    <div id="hero-video-bg" class="absolute inset-0 -z-10 opacity-60 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop');"></div>
+                    <div id="hero-video-bg" class="absolute inset-0 z-0 bg-cover bg-center" style="background-image: url('https://img.youtube.com/vi/e_04ZrNroTo/maxresdefault.jpg');"></div>
                 </div>
                 
                 <div class="mt-12 md:mt-16 pt-8 border-t border-gray-200">
@@ -153,69 +154,138 @@
                     <p id="problem-subtitle" class="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">Recruiters drown in chaotic formats. See how Kenja turns noise into intelligence instantly.</p>
                 </div>
                 
-                <!-- SLIDER COMPONENT - WITH CLUTTER RESTORED -->
+                <!-- SLIDER COMPONENT -->
                 <div class="max-w-6xl mx-auto bg-gray-100 rounded-xl shadow-xl overflow-hidden border border-gray-200 h-[450px] md:h-[650px]">
                     <div class="relative w-full h-full slider-container" id="comparison-slider">
-                        <!-- AFTER Image (Clean) -->
+                        
+                        <!-- AFTER Image (Structured JSON) -->
                         <div class="absolute inset-0 w-full h-full bg-white flex flex-col">
                             <div class="bg-kenja-gray p-3 md:p-4 border-b flex justify-between items-center">
                                 <span class="font-bold text-kenja-green flex items-center gap-2 text-sm md:text-base"><i data-lucide="check-circle" class="w-4 h-4"></i> AI Standardized Output</span>
                                 <span class="text-[10px] md:text-xs text-gray-500 bg-white px-2 md:px-3 py-1 rounded border shadow-sm">Standardized JSON</span>
                             </div>
-                            <div class="p-4 md:p-8 overflow-y-auto font-mono text-xs md:text-sm text-gray-700 h-full">
+                            <div class="p-4 md:p-8 overflow-y-auto font-mono text-xs md:text-sm text-gray-700 h-full bg-gray-50">
                                 <div class="space-y-4">
-                                    <div class="p-3 md:p-4 bg-blue-50 border border-blue-100 rounded-lg shadow-sm"><span class="text-kenja-blue font-bold block mb-1">"ai_summary":</span> <span class="text-gray-700 leading-relaxed">"Senior Project Manager with 7 years of experience in Fintech. Proven track record in Agile methodologies..."</span></div>
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div class="p-3 md:p-4 bg-gray-50 border rounded-lg"><div class="text-[10px] md:text-xs text-gray-400 uppercase font-bold mb-2">Technical Skills</div><div class="flex flex-wrap gap-2"><span class="px-2 py-1 bg-white border rounded text-[10px] md:text-xs">Python (Expert)</span><span class="px-2 py-1 bg-white border rounded text-[10px] md:text-xs">React</span></div></div>
-                                        <div class="p-3 md:p-4 bg-gray-50 border rounded-lg"><div class="text-[10px] md:text-xs text-gray-400 uppercase font-bold mb-2">Languages</div><div class="flex flex-col gap-1"><div class="flex justify-between text-[10px] md:text-xs"><span>English</span> <span class="font-bold">Native</span></div></div></div>
+                                    <!-- Name & Role -->
+                                    <div class="p-3 bg-white border border-gray-200 rounded-lg shadow-sm">
+                                        <span class="text-purple-600 font-bold">"candidate_profile":</span> {<br>
+                                        &nbsp;&nbsp;<span class="text-gray-800">"name":</span> <span class="text-green-600">"Nanashi no Gonbei"</span>,<br>
+                                        &nbsp;&nbsp;<span class="text-gray-800">"title":</span> <span class="text-green-600">"Senior Java Software Engineer"</span>,<br>
+                                        &nbsp;&nbsp;<span class="text-gray-800">"experience":</span> <span class="text-blue-600">5+ Years</span><br>
+                                        }
                                     </div>
-                                    <div class="border rounded-lg p-3 md:p-4 bg-white"><div class="text-kenja-blue font-bold mb-2">"work_experience": [</div><div class="pl-4 border-l-2 border-gray-200 space-y-3"><div><span class="font-bold text-gray-800">"role": "Senior PM",</span><br><span class="text-green-600">"key_achievement": "Reduced deployment time by 40%."</span></div></div><div class="text-kenja-blue font-bold mt-2">]</div></div>
+
+                                    <!-- Summary -->
+                                    <div class="p-3 bg-blue-50 border border-blue-100 rounded-lg shadow-sm">
+                                        <span class="text-kenja-blue font-bold block mb-1">"ai_summary":</span> 
+                                        <span class="text-gray-700 leading-relaxed">"Senior Java Software Engineer and Technical Lead with extensive experience in Banking, Wealth Management, and Insurance sectors. Expert in Microservices, Spring Boot, and CI/CD pipelines. Certified Scrum Master."</span>
+                                    </div>
+
+                                    <!-- Skills Grid -->
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div class="p-3 bg-white border rounded-lg">
+                                            <div class="text-[10px] text-gray-400 uppercase font-bold mb-2">Key Skills</div>
+                                            <div class="flex flex-wrap gap-2">
+                                                <span class="px-2 py-1 bg-gray-100 border rounded text-[10px] md:text-xs">Java (10y)</span>
+                                                <span class="px-2 py-1 bg-gray-100 border rounded text-[10px] md:text-xs">Spring Boot</span>
+                                                <span class="px-2 py-1 bg-gray-100 border rounded text-[10px] md:text-xs">Microservices</span>
+                                                <span class="px-2 py-1 bg-gray-100 border rounded text-[10px] md:text-xs">Docker/K8s</span>
+                                            </div>
+                                        </div>
+                                        <div class="p-3 bg-white border rounded-lg">
+                                            <div class="text-[10px] text-gray-400 uppercase font-bold mb-2">Education</div>
+                                            <div class="text-[10px] md:text-xs">
+                                                <span class="font-bold block">B.Eng. Software Engineering</span>
+                                                <span class="text-gray-600">University of Westminster (2nd Class Upper)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Experience Array -->
+                                    <div class="border rounded-lg p-3 bg-white">
+                                        <div class="text-kenja-blue font-bold mb-2">"work_history": [</div>
+                                        <div class="pl-4 border-l-2 border-gray-200 space-y-2 text-xs">
+                                            <div class="mb-2">
+                                                <span class="font-bold text-gray-800">{ "company": "ABC PVT LTD",</span><br>
+                                                <span class="text-gray-600">&nbsp;&nbsp;"role": "Technical Lead",</span><br>
+                                                <span class="text-green-600">&nbsp;&nbsp;"key_achievement": "Designed Risk Engine API (840k TPS)." }</span>
+                                            </div>
+                                            <div class="opacity-75">
+                                                <span class="font-bold text-gray-800">{ "company": "CrimsonLogic",</span><br>
+                                                <span class="text-gray-600">&nbsp;&nbsp;"role": "Senior Software Engineer",</span><br>
+                                                <span class="text-green-600">&nbsp;&nbsp;"key_achievement": "Developed Hive product & SLA portal." }</span>
+                                            </div>
+                                        </div>
+                                        <div class="text-kenja-blue font-bold mt-2">]</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- BEFORE Image (Cluttered) -->
-                        <div class="absolute inset-0 h-full bg-gray-200 overflow-hidden border-r-4 border-white shadow-[10px_0_20px_rgba(0,0,0,0.2)]" id="slider-overlay" style="width: 50%;">
+                        <!-- BEFORE Image (Cluttered Raw Resume) -->
+                        <div class="absolute inset-0 h-full bg-gray-100 overflow-hidden border-r-4 border-white shadow-[10px_0_20px_rgba(0,0,0,0.2)]" id="slider-overlay" style="width: 50%;">
                             <div class="absolute inset-0 w-[800px] md:w-[1152px]">
-                                <div class="bg-gray-800 p-3 md:p-4 border-b flex justify-between items-center text-white"><span class="font-bold text-red-400 flex items-center gap-2 text-sm md:text-base"><i data-lucide="file-warning" class="w-4 h-4"></i> Unstructured Input</span><span class="text-[10px] md:text-xs text-gray-400">Messy PDF / Rirekisho / Image</span></div>
-                                <div class="p-4 md:p-8 bg-white h-full relative font-serif text-gray-800">
-                                    <!-- Restored Clutter: Giant CV text, rotated elements, mixed fonts -->
-                                    <div class="absolute top-4 right-4 text-6xl text-gray-100 font-bold rotate-12 pointer-events-none">CV</div>
-                                    <div class="flex justify-between items-end mb-8 border-b-2 border-black pb-4">
+                                <div class="bg-gray-800 p-3 md:p-4 border-b flex justify-between items-center text-white">
+                                    <span class="font-bold text-red-400 flex items-center gap-2 text-sm md:text-base"><i data-lucide="file-warning" class="w-4 h-4"></i> Unstructured Input</span>
+                                    <span class="text-[10px] md:text-xs text-gray-400">Raw PDF / Word / Text</span>
+                                </div>
+                                <div class="p-6 md:p-10 bg-white h-full relative font-serif text-gray-800 overflow-hidden select-none">
+                                    <!-- Visual Noise -->
+                                    <div class="absolute top-20 right-10 text-8xl text-gray-100 font-bold rotate-12 pointer-events-none opacity-50">RESUME</div>
+                                    <div class="absolute bottom-20 left-10 w-32 h-32 border-4 border-gray-100 rounded-full opacity-50 pointer-events-none"></div>
+
+                                    <!-- Header Chaos -->
+                                    <div class="flex justify-between items-start mb-6 border-b-2 border-black pb-4">
                                         <div>
-                                            <h3 class="text-4xl font-bold italic">Taro Tanaka</h3>
-                                            <p class="text-sm">Tokyo, Japan | 090-XXXX-XXXX</p>
+                                            <h3 class="text-3xl md:text-4xl font-bold uppercase leading-tight">Nanashi no<br>Gonbei</h3>
+                                            <p class="text-xs md:text-sm mt-2 text-gray-600">Aichi, Japan | nanashi.gonbei@email.com | 070-XXXX-XXXX</p>
                                         </div>
-                                        <div class="text-right">
-                                            <div class="bg-gray-200 w-24 h-24 flex items-center justify-center text-xs text-gray-500 border border-dashed border-gray-400">Headshot</div>
+                                        <div class="w-20 h-24 bg-gray-200 border border-dashed border-gray-400 flex items-center justify-center text-[10px] text-gray-500 rotate-2 shadow-sm">
+                                            Passport<br>Photo
                                         </div>
                                     </div>
-                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                        <div class="col-span-2">
-                                            <h4 class="font-bold uppercase border-b mb-2">Experience / 職歴</h4>
-                                            <div class="mb-4">
-                                                <p class="font-bold">2019年4月 - 現在: 株式会社 Global Tech</p>
-                                                <p class="text-sm text-gray-600">Project Manager. Led a team of 10 developers. 担当プロジェクト: 金融システム開発。</p>
-                                                <p class="text-sm mt-1"><i>"Managing huge datasets and timelines."</i></p>
-                                            </div>
-                                            <div class="mb-4 opacity-70">
-                                                <p class="font-bold">2015 - 2019: SoftSys Inc.</p>
-                                                <p class="text-sm">Developer. Java, C++. Worked hard.</p>
-                                            </div>
+
+                                    <!-- Dense Text Block -->
+                                    <div class="mb-6">
+                                        <h4 class="font-bold uppercase bg-gray-200 px-2 py-1 text-sm inline-block mb-2">Professional Summary</h4>
+                                        <p class="text-xs md:text-sm leading-relaxed text-justify">
+                                            Senior Java Software Engineer and Technical Lead with 5+ years of experience delivering scalable solutions for Banking, Wealth Management, and Insurance sectors. Expert in Microservices architecture, Spring Boot, and CI/CD pipelines. Certified Scrum Master with a proven track record of leading agile teams. Currently based in Aichi, Japan, seeking full-time engineering roles.
+                                        </p>
+                                    </div>
+
+                                    <!-- Cluttered Table -->
+                                    <div class="mb-6">
+                                        <h4 class="font-bold uppercase text-sm border-b border-gray-300 mb-2">Technical Summary</h4>
+                                        <div class="grid grid-cols-2 gap-x-8 gap-y-2 text-xs">
+                                            <div><strong>Languages:</strong> Java(10y), JS, Python, VB Script</div>
+                                            <div><strong>Frameworks:</strong> Spring, Hibernate, Struts2</div>
+                                            <div><strong>DevOps:</strong> Docker, K8s, Jenkins, Puppet</div>
+                                            <div><strong>Tools:</strong> Jmeter, Selenium, SonarQube</div>
+                                            <div><strong>Databases:</strong> Oracle, MySQL, MongoDB</div>
+                                            <div><strong>Cloud:</strong> AWS, EC2</div>
                                         </div>
-                                        <div class="col-span-1 bg-gray-100 p-4 -rotate-1 shadow-sm">
-                                            <h4 class="font-bold text-sm mb-2">Skills (Random)</h4>
+                                    </div>
+
+                                    <!-- Experience List (Dense) -->
+                                    <div>
+                                        <h4 class="font-bold uppercase bg-gray-200 px-2 py-1 text-sm inline-block mb-2">Experience / 職歴</h4>
+                                        
+                                        <div class="mb-4 pl-2 border-l-2 border-gray-300">
+                                            <p class="font-bold text-sm">Technical Lead | ABC PVT LTD</p>
+                                            <p class="text-xs italic text-gray-500 mb-1">Dec 2019 - Sept 2025</p>
                                             <ul class="list-disc pl-4 text-xs space-y-1">
-                                                <li>Python</li>
-                                                <li>Excel (Expert)</li>
-                                                <li>Swimming</li>
-                                                <li>HTML/CSS</li>
+                                                <li>Wealth management & Capital market divisions.</li>
+                                                <li>Researched, designed and developed Risk Engine API.</li>
+                                                <li>Managed Advisory team (8 members) as Scrum Master.</li>
+                                                <li>Led team to fix major security issues (log4j).</li>
                                             </ul>
                                         </div>
-                                    </div>
-                                    <div class="mt-8 p-4 border border-gray-300 rounded-lg opacity-50">
-                                        <h4 class="font-bold text-sm">Hobbies & Interests</h4>
-                                        <p class="text-xs">I enjoy hiking on weekends and reading sci-fi novels. Contact me anytime.</p>
+
+                                        <div class="mb-4 pl-2 border-l-2 border-gray-300 opacity-75">
+                                            <p class="font-bold text-sm">Senior Software Engineer | CrimsonLogic</p>
+                                            <p class="text-xs italic text-gray-500 mb-1">Aug 2017 - Dec 2019</p>
+                                            <p class="text-xs">Researched, designed and developed the Hive product and SLA portal feature set including REST APIs.</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -405,6 +475,13 @@
             });
         }
 
+        // Helper to extract YouTube ID
+        function getYouTubeId(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+
         function renderFeatures(features) {
             const container = document.getElementById('features-grid');
             if(!container) return;
@@ -519,7 +596,29 @@
             headingEl.innerHTML = h.heading || 'Transform Any Resume Into a Standardized Format—Instantly.';
             const subEl = document.getElementById('hero-subheading');
             subEl.innerHTML = h.subheading || 'AI-driven parsing for speed, accuracy, and enterprise recruitment success.';
-            if(h.videoUrl) document.getElementById('hero-video-bg').style.backgroundImage = `url('${h.videoUrl}')`;
+            
+            // YOUTUBE FIX
+            // Use the specific video ID: e_04ZrNroTo
+            const videoId = 'e_04ZrNroTo'; 
+            
+            document.getElementById('hero-video-bg').style.backgroundImage = `url('https://img.youtube.com/vi/${videoId}/maxresdefault.jpg')`;
+            
+            const videoContainer = document.getElementById('hero-video');
+            videoContainer.onclick = () => {
+                // Use the user-provided embed code structure but with dynamic resizing classes
+                videoContainer.innerHTML = `<iframe 
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.youtube.com/embed/${videoId}?si=2tcBFT-wDqU20Y_X&autoplay=1&mute=1" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
+                    allowfullscreen 
+                    class="absolute inset-0 w-full h-full rounded-xl md:rounded-2xl">
+                </iframe>`;
+            };
+
             const statsContainer = document.getElementById('hero-stats');
             if(h.stats) {
                 statsContainer.innerHTML = h.stats.map(stat => `<div class="flex items-center gap-1 md:gap-2 bg-white/50 px-2 py-1 rounded md:bg-transparent"><i data-lucide="${stat.icon}" class="text-kenja-green w-4 h-4 md:w-5 md:h-5"></i><span>${stat.label}</span></div>`).join('');
