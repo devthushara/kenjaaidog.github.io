@@ -99,8 +99,8 @@
 
     <main id="sections-container">
 
-        <!-- 2. Hero Section -->
-        <section id="hero" class="pt-24 pb-12 md:pt-40 md:pb-28 bg-gradient-to-b from-white to-kenja-gray overflow-hidden">
+        <!-- 2. Hero Section (MOVED UP SLIGHTLY) -->
+        <section id="hero" class="pt-20 pb-12 md:pt-32 md:pb-24 bg-gradient-to-b from-white to-kenja-gray overflow-hidden">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <div class="max-w-4xl mx-auto mb-8 md:mb-12">
                     <div id="hero-badge" class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-kenja-blue/10 text-kenja-blue text-xs md:text-sm font-semibold mb-6 animate-fade-in-up">
@@ -128,10 +128,12 @@
 
                 <!-- VIDEO CONTAINER -->
                 <div id="hero-video" class="relative max-w-5xl mx-auto rounded-xl md:rounded-2xl shadow-xl md:shadow-2xl overflow-hidden border-4 md:border-8 border-white bg-gray-900 aspect-video group cursor-pointer scroll-mt-24 md:scroll-mt-32">
+                    <!-- Default state: Thumbnail & Play Button -->
                     <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
                         <div class="w-16 h-16 md:w-20 md:h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"><i data-lucide="play" class="w-6 h-6 md:w-8 md:h-8 text-white ml-1"></i></div>
                     </div>
-                    <div id="hero-video-bg" class="absolute inset-0 z-0 bg-cover bg-center" style="background-image: url('https://img.youtube.com/vi/e_04ZrNroTo/maxresdefault.jpg');"></div>
+                    <!-- Thumbnail -->
+                    <div id="hero-video-bg" class="absolute inset-0 z-0 bg-cover bg-center" style="background-image: url('https://www.shutterstock.com/shutterstock/videos/3462523569/thumb/1.jpg?ip=x480');"></div>
                 </div>
                 
                 <div class="mt-12 md:mt-16 pt-8 border-t border-gray-200">
@@ -146,7 +148,7 @@
             </div>
         </section>
 
-        <!-- 3. Problem & Solution -->
+        <!-- 3. Problem & Solution (UPDATED WITH NANASHI CV) -->
         <section id="problem" class="py-16 md:py-24 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-10 md:mb-16">
@@ -171,14 +173,14 @@
                                         <span class="text-purple-600 font-bold">"candidate_profile":</span> {<br>
                                         &nbsp;&nbsp;<span class="text-gray-800">"name":</span> <span class="text-green-600">"Nanashi no Gonbei"</span>,<br>
                                         &nbsp;&nbsp;<span class="text-gray-800">"title":</span> <span class="text-green-600">"Senior Java Software Engineer"</span>,<br>
-                                        &nbsp;&nbsp;<span class="text-gray-800">"experience":</span> <span class="text-blue-600">5+ Years</span><br>
+                                        &nbsp;&nbsp;<span class="text-gray-800">"experience":</span> <span class="text-blue-600">11+ Years</span><br>
                                         }
                                     </div>
 
                                     <!-- Summary -->
                                     <div class="p-3 bg-blue-50 border border-blue-100 rounded-lg shadow-sm">
                                         <span class="text-kenja-blue font-bold block mb-1">"ai_summary":</span> 
-                                        <span class="text-gray-700 leading-relaxed">"Senior Java Software Engineer and Technical Lead with extensive experience in Banking, Wealth Management, and Insurance sectors. Expert in Microservices, Spring Boot, and CI/CD pipelines. Certified Scrum Master."</span>
+                                        <span class="text-gray-700 leading-relaxed">"Senior Java Software Engineer and Technical Lead with extensive experience in Banking, Wealth Management, and Insurance sectors. Expert in Microservices, Spring Boot, and CI/CD pipelines."</span>
                                     </div>
 
                                     <!-- Skills Grid -->
@@ -206,12 +208,12 @@
                                         <div class="text-kenja-blue font-bold mb-2">"work_history": [</div>
                                         <div class="pl-4 border-l-2 border-gray-200 space-y-2 text-xs">
                                             <div class="mb-2">
-                                                <span class="font-bold text-gray-800">{ "company": "ABC PVT LTD",</span><br>
+                                                <span class="font-bold text-gray-800">{ "company": "Global Tech Corp",</span><br>
                                                 <span class="text-gray-600">&nbsp;&nbsp;"role": "Technical Lead",</span><br>
                                                 <span class="text-green-600">&nbsp;&nbsp;"key_achievement": "Designed Risk Engine API (840k TPS)." }</span>
                                             </div>
                                             <div class="opacity-75">
-                                                <span class="font-bold text-gray-800">{ "company": "CrimsonLogic",</span><br>
+                                                <span class="font-bold text-gray-800">{ "company": "Software Solutions Inc",</span><br>
                                                 <span class="text-gray-600">&nbsp;&nbsp;"role": "Senior Software Engineer",</span><br>
                                                 <span class="text-green-600">&nbsp;&nbsp;"key_achievement": "Developed Hive product & SLA portal." }</span>
                                             </div>
@@ -222,7 +224,7 @@
                             </div>
                         </div>
                         
-                        <!-- BEFORE Image (Cluttered Raw Resume) -->
+                        <!-- BEFORE Image (Cluttered Raw Resume - Nanashi no Gonbei) -->
                         <div class="absolute inset-0 h-full bg-gray-100 overflow-hidden border-r-4 border-white shadow-[10px_0_20px_rgba(0,0,0,0.2)]" id="slider-overlay" style="width: 50%;">
                             <div class="absolute inset-0 w-[800px] md:w-[1152px]">
                                 <div class="bg-gray-800 p-3 md:p-4 border-b flex justify-between items-center text-white">
@@ -231,7 +233,7 @@
                                 </div>
                                 <div class="p-6 md:p-10 bg-white h-full relative font-serif text-gray-800 overflow-hidden select-none">
                                     <!-- Visual Noise -->
-                                    <div class="absolute top-20 right-10 text-8xl text-gray-100 font-bold rotate-12 pointer-events-none opacity-50">RESUME</div>
+                                    <div class="absolute top-20 right-10 text-8xl text-gray-100 font-bold rotate-12 pointer-events-none opacity-50">CV</div>
                                     <div class="absolute bottom-20 left-10 w-32 h-32 border-4 border-gray-100 rounded-full opacity-50 pointer-events-none"></div>
 
                                     <!-- Header Chaos -->
@@ -249,7 +251,7 @@
                                     <div class="mb-6">
                                         <h4 class="font-bold uppercase bg-gray-200 px-2 py-1 text-sm inline-block mb-2">Professional Summary</h4>
                                         <p class="text-xs md:text-sm leading-relaxed text-justify">
-                                            Senior Java Software Engineer and Technical Lead with 5+ years of experience delivering scalable solutions for Banking, Wealth Management, and Insurance sectors. Expert in Microservices architecture, Spring Boot, and CI/CD pipelines. Certified Scrum Master with a proven track record of leading agile teams. Currently based in Aichi, Japan, seeking full-time engineering roles.
+                                            Senior Java Software Engineer and Technical Lead with 11+ years of experience delivering scalable solutions for Banking, Wealth Management, and Insurance sectors. Expert in Microservices architecture, Spring Boot, and CI/CD pipelines. Certified Scrum Master with a proven track record of leading agile teams. Currently based in Aichi, Japan, seeking full-time engineering roles.
                                         </p>
                                     </div>
 
@@ -271,7 +273,7 @@
                                         <h4 class="font-bold uppercase bg-gray-200 px-2 py-1 text-sm inline-block mb-2">Experience / 職歴</h4>
                                         
                                         <div class="mb-4 pl-2 border-l-2 border-gray-300">
-                                            <p class="font-bold text-sm">Technical Lead | ABC PVT LTD</p>
+                                            <p class="font-bold text-sm">Technical Lead | Global Tech Corp</p>
                                             <p class="text-xs italic text-gray-500 mb-1">Dec 2019 - Sept 2025</p>
                                             <ul class="list-disc pl-4 text-xs space-y-1">
                                                 <li>Wealth management & Capital market divisions.</li>
@@ -282,7 +284,7 @@
                                         </div>
 
                                         <div class="mb-4 pl-2 border-l-2 border-gray-300 opacity-75">
-                                            <p class="font-bold text-sm">Senior Software Engineer | CrimsonLogic</p>
+                                            <p class="font-bold text-sm">Senior Software Engineer | Software Solutions Inc</p>
                                             <p class="text-xs italic text-gray-500 mb-1">Aug 2017 - Dec 2019</p>
                                             <p class="text-xs">Researched, designed and developed the Hive product and SLA portal feature set including REST APIs.</p>
                                         </div>
@@ -598,26 +600,21 @@
             subEl.innerHTML = h.subheading || 'AI-driven parsing for speed, accuracy, and enterprise recruitment success.';
             
             // YOUTUBE FIX
-            // Use the specific video ID: e_04ZrNroTo
-            const videoId = 'e_04ZrNroTo'; 
-            
-            document.getElementById('hero-video-bg').style.backgroundImage = `url('https://img.youtube.com/vi/${videoId}/maxresdefault.jpg')`;
-            
-            const videoContainer = document.getElementById('hero-video');
-            videoContainer.onclick = () => {
-                // Use the user-provided embed code structure but with dynamic resizing classes
-                videoContainer.innerHTML = `<iframe 
-                    width="100%" 
-                    height="100%" 
-                    src="https://www.youtube.com/embed/${videoId}?si=2tcBFT-wDqU20Y_X&autoplay=1&mute=1" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    referrerpolicy="strict-origin-when-cross-origin" 
-                    allowfullscreen 
-                    class="absolute inset-0 w-full h-full rounded-xl md:rounded-2xl">
-                </iframe>`;
-            };
+            if(h.videoUrl) {
+                const youtubeId = getYouTubeId(h.videoUrl);
+                // If valid YouTube ID found, use custom player
+                // If NOT found, default to provided ID: e_04ZrNroTo
+                const finalId = youtubeId ;
+
+                document.getElementById('hero-video-bg').style.backgroundImage = `url('https://img.youtube.com/vi/${finalId}/maxresdefault.jpg')`;
+                
+                const videoContainer = document.getElementById('hero-video');
+                videoContainer.onclick = () => {
+                    // IMPORTANT: Added 'origin' parameter to fix Error 153
+                    const embedUrl = `https://www.youtube.com/embed/${finalId}?autoplay=1&mute=1&modestbranding=1&rel=0&iv_load_policy=3&origin=${window.location.origin}`;
+                    videoContainer.innerHTML = `<iframe width="100%" height="100%" src="${embedUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="absolute inset-0 w-full h-full rounded-xl md:rounded-2xl"></iframe>`;
+                };
+            }
 
             const statsContainer = document.getElementById('hero-stats');
             if(h.stats) {
