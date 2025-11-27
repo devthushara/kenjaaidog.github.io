@@ -49,6 +49,23 @@
             animation: loading 1.5s infinite;
         }
         @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+        /* Custom Arrow Animation */
+        .arrow-bounce {
+            animation: bounce-x 1s infinite;
+        }
+        @keyframes bounce-x {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-5px); }
+        }
+        .arrow-bounce-y {
+            animation: bounce-y 1s infinite;
+        }
+        @keyframes bounce-y {
+            0%, 100% { transform: translateY(0) rotate(45deg); }
+            50% { transform: translateY(-5px) rotate(45deg); }
+        }
+        /* Custom Arrow Animation */
     </style>
 </head>
 <body class="font-sans text-kenja-text antialiased bg-white relative pb-20 md:pb-0">
@@ -113,11 +130,29 @@
                     <p id="hero-subheading" class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed px-2">
                         AI-driven parsing for speed, accuracy, and enterprise recruitment success. Eliminate the high cost of manual data entry errors.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10 md:mb-16 px-4">
+                    <!-- <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10 md:mb-16 px-4">
                         <button onclick="document.getElementById('pricing').scrollIntoView({behavior: 'smooth'})" class="w-full sm:w-auto bg-kenja-green hover:bg-green-500 text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg shadow-kenja-green/30 transition-all transform hover:-translate-y-1">Start Free Trial</button>
                         <button onclick="document.getElementById('hero-video').scrollIntoView({behavior: 'smooth'})" class="w-full sm:w-auto px-8 py-4 rounded-full font-semibold text-kenja-blue border-2 border-kenja-blue/20 hover:border-kenja-blue hover:bg-kenja-blue/5 transition-all flex items-center justify-center gap-2"><i data-lucide="play-circle" class="w-5 h-5"></i>Watch Demo</button>
-                    </div>
+                    </div> -->
                     
+<!-- Buttons with ARROW -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10 md:mb-16 px-4 relative">
+                        <button onclick="document.getElementById('pricing').scrollIntoView({behavior: 'smooth'})" class="w-full sm:w-auto min-w-[220px] bg-kenja-green hover:bg-green-500 text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg shadow-kenja-green/30 transition-all transform hover:-translate-y-1 text-center">Start Free Trial</button>
+                        
+                        <div class="relative w-full sm:w-auto flex justify-center">
+                            <button onclick="document.getElementById('hero-video').scrollIntoView({behavior: 'smooth'})" class="w-full sm:w-auto min-w-[220px] px-8 py-4 rounded-full font-semibold text-kenja-blue border-2 border-kenja-blue/20 hover:border-kenja-blue hover:bg-kenja-blue/5 transition-all flex items-center justify-center gap-2 text-center"><i data-lucide="play-circle" class="w-5 h-5"></i>Watch Demo</button>
+                            
+                            <!-- HAND-DRAWN ARROW 1 (Hero) -->
+                            <div class="absolute left-full top-1/2 -translate-y-1/2 ml-4 hidden md:block">
+                                <svg class="w-24 h-24 text-red-500 arrow-bounce" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M90 50 C 70 40, 40 40, 10 50" />
+                                    <path d="M10 50 L 30 35" />
+                                    <path d="M10 50 L 30 65" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
                     <div id="hero-stats" class="flex justify-center gap-4 md:gap-16 text-sm md:text-base text-gray-500 flex-wrap px-2">
                         <!-- Initial Static Stats -->
                         <div class="flex items-center gap-1 md:gap-2 bg-white/50 px-2 py-1 rounded md:bg-transparent"><i data-lucide="zap" class="text-kenja-green w-4 h-4 md:w-5 md:h-5"></i><span>30s Processing</span></div>
