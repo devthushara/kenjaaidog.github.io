@@ -59,7 +59,7 @@
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
         
         /* Slider Logic */
-        .slider-container { position: relative; overflow: hidden; user-select: none; -webkit-user-select: none; touch-action: none; /* Critical for mobile drag */ }
+        .slider-container { position: relative; overflow: hidden; user-select: none; touch-action: none; -webkit-user-select: none; }
         .slider-handle { position: absolute; top: 0; bottom: 0; width: 4px; background: #2062eb; cursor: col-resize; z-index: 30; }
         .slider-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 48px; height: 48px; background: #2062eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); border: 2px solid white; pointer-events: none; }
         
@@ -95,7 +95,6 @@
                 
                 <!-- Desktop Links -->
                 <div class="hidden md:flex items-center space-x-8" id="desktop-menu">
-                    <!-- Default static links (will be replaced if Sanity loads) -->
                     <a href="#hero" class="text-gray-600 hover:text-kenja-blue font-medium transition-colors">Home</a>
                     <a href="#features" class="text-gray-600 hover:text-kenja-blue font-medium transition-colors">Features</a>
                     <a href="#how-it-works" class="text-gray-600 hover:text-kenja-blue font-medium transition-colors">How it Works</a>
@@ -121,9 +120,8 @@
         </div>
         
         <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white/98 backdrop-blur-xl border-t border-gray-100 absolute w-full shadow-2xl h-screen z-40 transition-all">
+        <div id="mobile-menu" class="hidden md:hidden bg-white bg-opacity-80 backdrop-blur-xl border-t border-gray-100 absolute w-full shadow-2xl h-screen z-40 transition-all">
             <div class="px-4 pt-4 pb-6 space-y-2" id="mobile-menu-items">
-                <!-- Default static mobile links -->
                 <a href="#hero" class="mobile-link block px-4 py-4 text-lg font-medium text-gray-700 hover:text-kenja-blue hover:bg-blue-50 rounded-xl transition-colors">Home</a>
                 <a href="#features" class="mobile-link block px-4 py-4 text-lg font-medium text-gray-700 hover:text-kenja-blue hover:bg-blue-50 rounded-xl transition-colors">Features</a>
                 <a href="#how-it-works" class="mobile-link block px-4 py-4 text-lg font-medium text-gray-700 hover:text-kenja-blue hover:bg-blue-50 rounded-xl transition-colors">How it Works</a>
@@ -154,10 +152,10 @@
                     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10 md:mb-16 px-4 relative">
                         <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" class="w-full sm:w-auto bg-kenja-green hover:bg-green-500 text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg shadow-kenja-green/30 transition-all transform hover:-translate-y-1">Start Free Trial</button>
                         
-                        <div class="relative w-full sm:w-auto">
-                            <button onclick="document.getElementById('hero-video').scrollIntoView({behavior: 'smooth'})" class="w-full sm:w-auto px-8 py-4 rounded-full font-semibold text-kenja-blue border-2 border-kenja-blue/20 hover:border-kenja-blue hover:bg-kenja-blue/5 transition-all flex items-center justify-center gap-2"><i data-lucide="play-circle" class="w-5 h-5"></i>Watch Demo</button>
-                            
-                            <!-- HAND-DRAWN ARROW (Desktop only) -->
+                        <!-- Watch Demo Button (Hidden if no video) -->
+                        <div id="watch-demo-container" class="relative w-full sm:w-auto">
+                            <button id="watch-demo-btn" onclick="document.getElementById('hero-video').scrollIntoView({behavior: 'smooth'})" class="w-full sm:w-auto px-8 py-4 rounded-full font-semibold text-kenja-blue border-2 border-kenja-blue/20 hover:border-kenja-blue hover:bg-kenja-blue/5 transition-all flex items-center justify-center gap-2"><i data-lucide="play-circle" class="w-5 h-5"></i>Watch Demo</button>
+                            <!-- HAND-DRAWN ARROW -->
                             <div class="absolute left-full top-1/2 -translate-y-1/2 ml-4 hidden md:block pointer-events-none">
                                 <svg class="w-24 h-24 text-red-500 arrow-bounce" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M90 50 C 70 40, 40 40, 10 50" />
@@ -177,13 +175,11 @@
                 </div>
 
                 <!-- VIDEO CONTAINER -->
-                <div id="hero-video" class="relative max-w-5xl mx-auto rounded-xl md:rounded-2xl shadow-xl md:shadow-2xl overflow-hidden border-4 md:border-8 border-white bg-gray-900 aspect-video group cursor-pointer scroll-mt-24 md:scroll-mt-32">
-                    <!-- Default state: Thumbnail & Play Button -->
+                <div id="hero-video" class="relative max-w-5xl mx-auto rounded-xl md:rounded-2xl shadow-xl md:shadow-2xl overflow-hidden border-4 md:border-8 border-white bg-gray-900 aspect-video group cursor-pointer scroll-mt-24 md:scroll-mt-32 hidden">
                     <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
                         <div class="w-16 h-16 md:w-24 md:h-24 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"><i data-lucide="play" class="w-6 h-6 md:w-10 md:h-10 text-white ml-1"></i></div>
                     </div>
-                    <!-- Thumbnail -->
-                    <div id="hero-video-bg" class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://www.shutterstock.com/shutterstock/videos/3462523569/thumb/1.jpg?ip=x480');"></div>
+                    <div id="hero-video-bg" class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"></div>
                     <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
                 </div>
                 
@@ -199,7 +195,7 @@
             </div>
         </section>
 
-        <!-- 3. Problem & Solution (The Slider) -->
+        <!-- 3. Problem & Solution -->
         <section id="problem" class="py-16 md:py-24 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-10 md:mb-16">
@@ -210,8 +206,7 @@
                 <!-- SLIDER COMPONENT -->
                 <div class="max-w-6xl mx-auto bg-gray-100 rounded-xl shadow-xl overflow-hidden border border-gray-200 h-[500px] md:h-[650px] relative touch-none">
                     <div class="relative w-full h-full slider-container" id="comparison-slider">
-                        
-                        <!-- AFTER Image (Structured JSON) -->
+                        <!-- AFTER Image -->
                         <div class="absolute inset-0 w-full h-full bg-white flex flex-col">
                             <div class="bg-kenja-gray p-3 md:p-4 border-b flex justify-between items-center shrink-0">
                                 <span class="font-bold text-kenja-green flex items-center gap-2 text-sm md:text-base"><i data-lucide="check-circle" class="w-4 h-4"></i> AI Standardized Output</span>
@@ -219,7 +214,6 @@
                             </div>
                             <div class="p-4 md:p-8 overflow-y-auto font-mono text-xs md:text-sm text-gray-700 h-full bg-gray-50">
                                 <div class="space-y-4">
-                                    <!-- Name & Role -->
                                     <div class="p-3 bg-white border border-gray-200 rounded-lg shadow-sm">
                                         <span class="text-purple-600 font-bold">"candidate_profile":</span> {<br>
                                         &nbsp;&nbsp;<span class="text-gray-800">"name":</span> <span class="text-green-600">"Nanashi no Gonbei"</span>,<br>
@@ -227,14 +221,10 @@
                                         &nbsp;&nbsp;<span class="text-gray-800">"experience":</span> <span class="text-blue-600">11+ Years</span><br>
                                         }
                                     </div>
-
-                                    <!-- Summary -->
                                     <div class="p-3 bg-blue-50 border border-blue-100 rounded-lg shadow-sm">
                                         <span class="text-kenja-blue font-bold block mb-1">"ai_summary":</span> 
                                         <span class="text-gray-700 leading-relaxed">"Senior Java Software Engineer and Technical Lead with extensive experience in Banking, Wealth Management, and Insurance sectors. Expert in Microservices, Spring Boot, and CI/CD pipelines. Certified Scrum Master."</span>
                                     </div>
-
-                                    <!-- Skills Grid -->
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div class="p-3 bg-white border rounded-lg">
                                             <div class="text-[10px] text-gray-400 uppercase font-bold mb-2">Key Skills</div>
@@ -253,8 +243,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!-- Experience Array -->
                                     <div class="border rounded-lg p-3 bg-white">
                                         <div class="text-kenja-blue font-bold mb-2">"work_history": [</div>
                                         <div class="pl-4 border-l-2 border-gray-200 space-y-2 text-xs">
@@ -274,20 +262,18 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- BEFORE Image (Cluttered Raw Resume) -->
+
+                        <!-- BEFORE Image -->
                         <div class="absolute inset-0 h-full bg-gray-100 overflow-hidden border-r-4 border-white shadow-[10px_0_20px_rgba(0,0,0,0.2)]" id="slider-overlay" style="width: 50%;">
-                            <div class="absolute inset-0 w-[600px] md:w-[1152px]"> <!-- Fixed width to prevent shrinking -->
+                            <div class="absolute inset-0 w-[600px] md:w-[1152px]">
                                 <div class="bg-gray-800 p-3 md:p-4 border-b flex justify-between items-center text-white shrink-0">
                                     <span class="font-bold text-red-400 flex items-center gap-2 text-sm md:text-base"><i data-lucide="file-warning" class="w-4 h-4"></i> Unstructured Input</span>
                                     <span class="text-[10px] md:text-xs text-gray-400">Raw PDF / Word / Text</span>
                                 </div>
                                 <div class="p-6 md:p-10 bg-white h-full relative font-serif text-gray-800 overflow-hidden select-none">
-                                    <!-- Visual Noise -->
                                     <div class="absolute top-20 right-10 text-8xl text-gray-100 font-bold rotate-12 pointer-events-none opacity-50">CV</div>
                                     <div class="absolute bottom-20 left-10 w-32 h-32 border-4 border-gray-100 rounded-full opacity-50 pointer-events-none"></div>
 
-                                    <!-- Header Chaos -->
                                     <div class="flex justify-between items-start mb-6 border-b-2 border-black pb-4">
                                         <div>
                                             <h3 class="text-3xl md:text-4xl font-bold uppercase leading-tight">Nanashi no<br>Gonbei</h3>
@@ -298,7 +284,6 @@
                                         </div>
                                     </div>
 
-                                    <!-- Dense Text Block -->
                                     <div class="mb-6">
                                         <h4 class="font-bold uppercase bg-gray-200 px-2 py-1 text-sm inline-block mb-2">Professional Summary</h4>
                                         <p class="text-xs md:text-sm leading-relaxed text-justify">
@@ -306,7 +291,6 @@
                                         </p>
                                     </div>
 
-                                    <!-- Cluttered Table -->
                                     <div class="mb-6">
                                         <h4 class="font-bold uppercase text-sm border-b border-gray-300 mb-2">Technical Summary</h4>
                                         <div class="grid grid-cols-2 gap-x-8 gap-y-2 text-xs">
@@ -319,7 +303,6 @@
                                         </div>
                                     </div>
 
-                                    <!-- Experience List (Dense) -->
                                     <div>
                                         <h4 class="font-bold uppercase bg-gray-200 px-2 py-1 text-sm inline-block mb-2">Experience / 職歴</h4>
                                         
@@ -343,7 +326,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="slider-handle" id="slider-handle" style="left: 50%;"><div class="slider-button"><i data-lucide="move-horizontal" class="text-white w-5 h-5 md:w-6 md:h-6"></i></div></div>
+                        <div class="slider-handle" id="slider-handle" style="left: 50%;">
+                            <div class="slider-button"><i data-lucide="move-horizontal" class="text-white w-5 h-5 md:w-6 md:h-6"></i></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -356,9 +341,8 @@
                     <span id="features-subtitle" class="text-kenja-green font-semibold tracking-wider uppercase text-xs md:text-sm">Why Kenja AI DOG?</span>
                     <h2 id="features-title" class="text-2xl md:text-4xl font-bold text-kenja-blue mt-2">More Than Just a Parser</h2>
                 </div>
-                <!-- Grid Container -->
                 <div id="features-grid" class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 md:gap-6">
-                    <!-- Skeleton Fallbacks -->
+                    <!-- Skeletons -->
                     <div class="md:col-span-2 bg-white rounded-2xl h-64 skeleton shadow-sm"></div>
                     <div class="md:col-span-2 bg-white rounded-2xl h-64 skeleton shadow-sm"></div>
                     <div class="md:col-span-2 bg-white rounded-2xl h-64 skeleton shadow-sm"></div>
@@ -373,42 +357,28 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-10 md:mb-16">
                     <h2 id="how-it-works-title" class="text-2xl md:text-3xl font-bold text-kenja-blue mb-4">Powered by RAG AI Architecture</h2>
-                    <p class="text-gray-600 text-sm md:text-base">We don't just match keywords. We understand context to eliminate hallucinations.</p>
                 </div>
-                <div class="relative">
+                <div id="how-it-works-container" class="relative">
                     <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gray-200 -z-10 transform -translate-y-1/2"></div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-                        <div class="bg-white p-6 rounded-xl border border-gray-100 text-center relative hover:-translate-y-1 transition-transform duration-300 shadow-sm hover:shadow-md">
-                            <div class="w-12 h-12 bg-white border-4 border-kenja-blue rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-kenja-blue">1</div>
-                            <h3 class="text-lg md:text-xl font-bold mb-2">Upload & OCR</h3>
-                            <p class="text-gray-600 text-xs md:text-sm">Document is ingested. OCR identifies layout structure vs. text content.</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-xl border border-gray-100 text-center relative hover:-translate-y-1 transition-transform duration-300 shadow-sm hover:shadow-md">
-                            <div class="w-12 h-12 bg-white border-4 border-kenja-blue rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-kenja-blue">2</div>
-                            <h3 class="text-lg md:text-xl font-bold mb-2">Vectorize & Retrieve</h3>
-                            <p class="text-gray-600 text-xs md:text-sm">Text is converted to vectors. AI retrieves context to ground understanding.</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-xl border border-gray-100 text-center relative hover:-translate-y-1 transition-transform duration-300 shadow-sm hover:shadow-md">
-                            <div class="w-12 h-12 bg-white border-4 border-kenja-green rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-kenja-green">3</div>
-                            <h3 class="text-lg md:text-xl font-bold mb-2">Generate Standard</h3>
-                            <p class="text-gray-600 text-xs md:text-sm">LLM generates a structured summary. 98% time saved.</p>
-                        </div>
+                    <!-- DYNAMIC STEPS CONTAINER -->
+                    <div id="how-it-works-steps" class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                        <!-- Skeletons -->
+                        <div class="bg-white p-6 rounded-xl border border-gray-100 h-64 skeleton"></div>
+                        <div class="bg-white p-6 rounded-xl border border-gray-100 h-64 skeleton"></div>
+                        <div class="bg-white p-6 rounded-xl border border-gray-100 h-64 skeleton"></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 6. Pricing (NO STRIPE) -->
+        <!-- 6. Pricing -->
         <section id="pricing" class="py-16 md:py-24 bg-kenja-gray">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-10 md:mb-16">
                     <h2 id="pricing-title" class="text-2xl md:text-3xl font-bold text-kenja-blue mb-4">Simple, Transparent Pricing</h2>
-                    <p class="text-sm md:text-base text-gray-600">Start with a free trial. No credit card required.</p>
                 </div>
                 <div id="pricing-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
-                    <!-- Cards will be injected by JS -->
-                    <div class="bg-white rounded-2xl h-96 skeleton shadow-sm"></div>
-                    <div class="bg-white rounded-2xl h-96 skeleton shadow-sm"></div>
+                    <!-- Skeletons -->
                     <div class="bg-white rounded-2xl h-96 skeleton shadow-sm"></div>
                 </div>
             </div>
@@ -420,7 +390,6 @@
                 <div class="bg-white rounded-2xl shadow-2xl p-6 md:p-12 border border-gray-100">
                     <div class="text-center mb-8 md:mb-10">
                         <h2 id="contact-title" class="text-2xl md:text-3xl font-bold text-kenja-blue mb-4">Ready to Transform Your Workflow?</h2>
-                        <p class="text-sm md:text-base text-gray-600">Leave your details below. Our team will reach out within 24 hours.</p>
                     </div>
                     <form class="space-y-4 md:space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
@@ -462,26 +431,17 @@
         </div>
     </footer>
 
-    <!-- Mobile Bottom CTA -->
-    <div class="md:hidden fixed bottom-0 left-0 w-full z-40 bg-white border-t border-gray-200 p-4 shadow-lg">
-        <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" class="block w-full bg-kenja-green text-white text-center py-3 rounded-lg font-bold shadow-md">Try Live Demo</button>
-    </div>
+    <div class="md:hidden fixed bottom-0 left-0 w-full z-50 bg-white border-t border-gray-200 p-4 shadow-lg"><a id="mobile-cta" href="#" class="block w-full bg-kenja-green text-white text-center py-3 rounded-lg font-bold shadow-md">Try Live Demo</a></div>
+    <div id="float-cta" class="hidden md:flex fixed bottom-8 right-8 z-40 transform translate-y-24 opacity-0 transition-all duration-500"><a id="float-cta-link" href="#" target="_blank" class="bg-kenja-green hover:bg-green-500 text-white px-6 py-3 rounded-full font-bold shadow-xl flex items-center gap-2 border-2 border-white hover:scale-105 transition-transform">Try Live Demo <i data-lucide="arrow-up-right" class="w-5 h-5"></i></a></div>
 
-    <!-- Floating CTA (Desktop) -->
-    <div id="float-cta" class="hidden md:flex fixed bottom-8 right-8 z-40 transform translate-y-24 opacity-0 transition-all duration-500">
-        <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" class="bg-kenja-green hover:bg-green-500 text-white px-6 py-3 rounded-full font-bold shadow-xl flex items-center gap-2 border-2 border-white hover:scale-105 transition-transform">
-            Try Live Demo <i data-lucide="arrow-up-right" class="w-5 h-5"></i>
-        </button>
-    </div>
-
-    <!-- MAIN LOGIC -->
+    <!-- DYNAMIC SCRIPT -->
     <script type="module">
         import { createClient } from 'https://esm.sh/@sanity/client'
         
-        // 1. Sanity Configuration
+        // FIX: Use the global SanityImageUrlBuilder we loaded in <head>
         const imageUrlBuilder = window.SanityImageUrlBuilder;
         const client = createClient({
-            projectId: 's4zfqt6v', // Even if this fails, the app works due to try/catch below
+            projectId: 's4zfqt6v', 
             dataset: 'production',
             useCdn: true,
             apiVersion: '2023-05-03'
@@ -508,32 +468,32 @@
             },
             "hero": *[_type == "hero"][0] {
                 badgeText, heading, subheading, videoUrl, stats, trustedLogos
+            },
+            "howItWorks": *[_type == "howItWorks"][0] {
+                title, subtitle, steps
             }
         }`
 
         async function loadContent() {
             try {
-                // Attempt to fetch Sanity data
                 const data = await client.fetch(QUERY);
-                
-                // If data exists, use it. If not (e.g., failed fetch), use Fallback (empty array triggers default render)
                 if (data) {
                     if(data.siteSettings?.sectionOrder) reorderSections(data.siteSettings.sectionOrder);
                     if(data.features) renderFeatures(data.features);
                     renderPricing(data.pricing || []); 
+                    renderHowItWorks(data.howItWorks || null);
                     if(data.siteSettings) renderSiteSettings(data.siteSettings);
                     if(data.hero) renderHero(data.hero);
                 } else { 
-                    throw new Error("Empty Data");
+                    renderPricing([]); 
+                    renderHowItWorks(null);
                 }
             } catch (error) {
-                console.warn("Using fallback static content (Sanity disconnected).");
-                renderPricing([]); // Loads defaults
-                renderFeatures(getFallbackFeatures()); // Loads fallback features
-                renderSiteSettings(getFallbackSettings()); // Loads fallback settings
-            } finally { 
-                // Initialize Icons
-                setTimeout(() => lucide.createIcons(), 100);
+                console.warn("Sanity disconnected. Using static fallback.", error);
+                renderPricing([]);
+                renderHowItWorks(null);
+            } finally {
+                lucide.createIcons();
             }
         }
 
@@ -550,30 +510,57 @@
             return (match && match[2].length === 11) ? match[2] : null;
         }
 
-        // --- RENDER FUNCTIONS ---
+        // --- NEW RENDER FUNCTION FOR HOW IT WORKS ---
+        function renderHowItWorks(data) {
+            const container = document.getElementById('how-it-works-steps');
+            const titleEl = document.getElementById('how-it-works-title');
+            
+            // Default Static Data (Fallback)
+            const defaults = {
+                title: "Powered by RAG AI Architecture",
+                steps: [
+                    { stepNumber: "1", title: "Upload & OCR", description: "Document is ingested. OCR identifies layout structure vs. text content.", color: "blue" },
+                    { stepNumber: "2", title: "Vectorize & Retrieve", description: "Text is converted to vectors. AI retrieves context to ground understanding.", color: "blue" },
+                    { stepNumber: "3", title: "Generate Standard", description: "LLM generates a structured summary. 98% time saved.", color: "green" }
+                ]
+            };
+
+            const content = data || defaults;
+            
+            if(titleEl) titleEl.innerText = content.title || defaults.title;
+
+            if(container) {
+                container.innerHTML = (content.steps || defaults.steps).map(step => {
+                    const textColor = step.color === 'green' ? 'text-kenja-green' : 'text-kenja-blue';
+                    return `
+                    <div class="bg-white p-6 rounded-xl border border-gray-100 text-center relative hover:-translate-y-1 transition-transform duration-300 shadow-sm hover:shadow-md">
+                        <!-- BIG BOLD NUMBER, NO CIRCLE -->
+                        <div class="text-6xl font-bold ${textColor} mb-4 opacity-90">${step.stepNumber}</div>
+                        <h3 class="text-lg md:text-xl font-bold mb-2">${step.title}</h3>
+                        <p class="text-gray-600 text-xs md:text-sm">${step.description}</p>
+                    </div>`;
+                }).join('');
+            }
+        }
 
         function renderFeatures(features) {
             const container = document.getElementById('features-grid');
             if(!container) return;
             
-            // Map dynamic numbers to static Tailwind classes for the CDN to pick up
             const colMap = { 1: 'md:col-span-1', 2: 'md:col-span-2', 3: 'md:col-span-3', 4: 'md:col-span-4' };
             const rowMap = { 1: 'md:row-span-1', 2: 'md:row-span-2' };
 
             container.innerHTML = features.map(f => {
                 let rowSpan = rowMap[f.gridRows] || 'md:row-span-1';
+                if(f.title && f.title.includes('Universal')) rowSpan = `md:row-span-1`;
                 const colSpan = colMap[f.gridCols] || 'md:col-span-1';
                 
                 const baseClasses = `${colSpan} ${rowSpan} rounded-2xl shadow-card hover:shadow-hover transition-shadow relative overflow-hidden group`;
                 
                 if(f.layout === 'speed') return `<div class="${baseClasses} bg-kenja-blue text-white p-6 md:p-8"><div class="relative z-10"><div class="flex items-center gap-3 mb-4"><div class="w-8 h-8 md:w-10 md:h-10 bg-white/20 rounded-lg flex items-center justify-center"><i data-lucide="${f.iconName}" class="text-white w-4 h-4 md:w-5 md:h-5"></i></div><h3 class="text-lg md:text-xl font-bold">${f.title}</h3></div><div class="grid grid-cols-2 gap-3 md:gap-4 mt-4"><div class="bg-white/10 p-3 md:p-4 rounded-lg backdrop-blur-sm"><div class="text-[10px] md:text-xs text-blue-200 uppercase mb-1">Human Recruiter</div><div class="text-lg md:text-2xl font-bold">${f.speedHuman || '30 Mins'}</div><div class="text-[10px] md:text-xs text-blue-200">per resume</div></div><div class="bg-kenja-green p-3 md:p-4 rounded-lg shadow-lg transform md:scale-105"><div class="text-[10px] md:text-xs text-white uppercase mb-1">Kenja AI DOG</div><div class="text-lg md:text-2xl font-bold">${f.speedAI || '30 Secs'}</div><div class="text-[10px] md:text-xs text-white">per resume</div></div></div><p class="text-xs md:text-sm mt-4 text-blue-100 text-center font-medium">${f.description}</p></div></div>`;
-                
                 if(f.layout === 'checklist') return `<div class="${baseClasses} bg-white p-6 md:p-8 flex flex-col justify-between"><div class="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity"><i data-lucide="file-check" class="w-32 h-32 md:w-48 md:h-48 text-kenja-blue"></i></div><div><div class="w-10 h-10 md:w-12 md:h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 md:mb-6"><i data-lucide="${f.iconName}" class="text-kenja-blue w-5 h-5 md:w-6 md:h-6"></i></div><h3 class="text-xl md:text-2xl font-bold text-kenja-text mb-2 md:mb-4">${f.title}</h3><p class="text-sm md:text-base text-gray-600 leading-relaxed">${f.description}</p></div><div class="mt-6 md:mt-8 bg-gray-50 rounded-lg p-3 md:p-4 border border-gray-100 relative z-10">${(f.checklist || []).map(item => `<div class="flex items-center gap-3 mb-2 last:mb-0"><i data-lucide="check" class="w-4 h-4 text-green-500"></i><span class="text-xs md:text-sm font-semibold text-gray-700">${item}</span></div>`).join('')}</div></div>`;
-                
                 if(f.layout === 'tags') return `<div class="${baseClasses} bg-white p-6 md:p-8 flex flex-col justify-between"><div class="flex justify-between items-start"><div><h3 class="text-lg md:text-xl font-bold text-kenja-text mb-2">${f.title}</h3><p class="text-xs md:text-sm text-gray-600">${f.description}</p></div><div class="w-10 h-10 md:w-12 md:h-12 bg-green-100 rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform shrink-0 ml-2"><i data-lucide="${f.iconName}" class="text-kenja-green w-5 h-5 md:w-6 md:h-6"></i></div></div><div class="flex flex-wrap gap-2 md:gap-3 mt-6">${(f.tags || []).map(tag => `<span class="px-2 py-1 md:px-3 md:py-1 bg-gray-100 rounded-full text-[10px] md:text-xs font-bold border border-gray-200">${tag}</span>`).join('')}</div></div>`;
-                
                 if(f.layout === 'chat') return `<div class="${baseClasses} bg-white p-6 md:p-8 border border-gray-100"><div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mb-4"><i data-lucide="${f.iconName}" class="text-purple-600 w-5 h-5"></i></div><h3 class="text-lg font-bold text-kenja-text mb-2">${f.title}</h3><div class="bg-gray-50 p-2 md:p-3 rounded text-[10px] md:text-xs text-gray-500 italic mb-2">"${f.chatQuery || 'Query...'}"</div><p class="text-xs md:text-sm text-gray-600">${f.description}</p></div>`;
-                
                 return `<div class="${baseClasses} bg-white p-6 md:p-8"><div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mb-4"><i data-lucide="${f.iconName}" class="text-red-500 w-5 h-5"></i></div><h3 class="text-lg font-bold text-kenja-text mb-2">${f.title}</h3><p class="text-xs md:text-sm text-gray-600">${f.description}</p></div>`;
             }).join('');
         }
@@ -581,21 +568,26 @@
         function renderPricing(plans) {
             const container = document.getElementById('pricing-grid');
             if(!container) return;
+
+            // FALLBACK DATA if API fails or returns empty
             const defaultPlans = [
-                { title: 'Starter', price: '¥2,999', period: '/mo', features: ['500 Resumes/mo', 'PDF & Word Support', '1 User Seat'], isPopular: false, buttonText: 'Start Free Trial' },
-                { title: 'Growth', price: '¥9,999', period: '/mo', features: ['5,000 Resumes/mo', 'All Formats + OCR', '5 User Seats', 'Priority Support'], isPopular: true, buttonText: 'Get Started' },
-                { title: 'Enterprise', price: 'Custom', period: '', features: ['Unlimited Volume', 'Full ATS Integration', 'SOC2 / GDPR Compliance'], isPopular: false, buttonText: 'Contact Sales' }
+                { title: 'Starter', price: '¥2,999', period: '/mo', features: ['500 Resumes/mo', 'PDF & Word Support', '1 User Seat'], isPopular: false, buttonText: 'Start Free Trial', stripePriceId: 'price_123_starter' },
+                { title: 'Growth', price: '¥9,999', period: '/mo', features: ['5,000 Resumes/mo', 'All Formats + OCR', '5 User Seats', 'Priority Support'], isPopular: true, buttonText: 'Get Started', stripePriceId: 'price_456_growth' },
+                { title: 'Enterprise', price: 'Custom', period: '', features: ['Unlimited Volume', 'Full ATS Integration', 'SOC2 / GDPR Compliance'], isPopular: false, buttonText: 'Contact Sales', stripePriceId: '' }
             ];
+
             const dataToUse = (plans && plans.length > 0) ? plans : defaultPlans;
-            
+
             container.innerHTML = dataToUse.map(p => {
                 const highlightClass = p.isPopular ? 'ring-2 ring-kenja-blue relative transform md:-translate-y-4 shadow-xl' : 'border border-transparent hover:border-kenja-blue/20 shadow-card';
                 const btnClass = p.isPopular ? 'bg-kenja-blue text-white hover:bg-blue-700' : 'border-2 border-kenja-blue text-kenja-blue hover:bg-blue-50';
+                
+                // Fix: Ensure features exists and is an array
                 const featureList = Array.isArray(p.features) ? p.features : [];
                 
                 // NO STRIPE - Just scroll to contact
                 const clickAction = `onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})"`;
-                
+
                 return `<div class="bg-white rounded-2xl p-6 md:p-8 transition-all ${highlightClass}">${p.isPopular ? '<div class="absolute top-0 right-0 left-0 bg-kenja-blue text-white text-xs font-bold text-center py-1 rounded-t-lg">MOST POPULAR</div>' : ''}<h3 class="text-lg font-semibold text-gray-500 mb-2 ${p.isPopular ? 'mt-2' : ''}">${p.title}</h3><div class="flex items-baseline gap-1 mb-6"><span class="text-3xl md:text-4xl font-bold text-kenja-text">${p.price}</span>${p.period ? `<span class="text-gray-500">${p.period}</span>` : ''}</div><ul class="space-y-3 md:space-y-4 mb-8 text-sm text-gray-600">${featureList.map(feat => `<li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-kenja-green"></i> ${feat}</li>`).join('')}</ul><button ${clickAction} class="w-full py-3 rounded-lg font-semibold transition-colors ${btnClass}">${p.buttonText}</button></div>`;
             }).join('');
         }
@@ -603,16 +595,13 @@
         function renderSiteSettings(settings) {
             const desktopMenu = document.getElementById('desktop-menu');
             const mobileMenu = document.getElementById('mobile-menu-items');
-            
             if(settings.navigation && settings.navigation.length > 0) {
                 const linksHtml = settings.navigation.map(link => `<a href="${link.url}" class="text-gray-600 hover:text-kenja-blue font-medium transition-colors">${link.label}</a>`).join('');
                 const mobileHtml = settings.navigation.map(link => `<a href="${link.url}" class="mobile-link block px-4 py-4 text-lg font-medium text-gray-700 hover:text-kenja-blue hover:bg-blue-50 rounded-xl transition-colors">${link.label}</a>`).join('');
                 desktopMenu.innerHTML = linksHtml;
                 mobileMenu.innerHTML = mobileHtml;
-                // Re-attach close listeners
                 document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', () => document.getElementById('mobile-menu').classList.add('hidden')));
             }
-            
             const logoContainer = document.getElementById('nav-logo-container');
             const logoSymbol = document.getElementById('nav-logo-symbol');
             if(settings.logoImage) {
@@ -620,7 +609,6 @@
             } else {
                 logoSymbol.innerText = settings.logoSymbol || 'K';
             }
-
             if(settings.headings) {
                 const h = settings.headings;
                 if(h.problemTitle) document.getElementById('problem-title').innerText = h.problemTitle;
@@ -631,7 +619,6 @@
                 if(h.pricingTitle) document.getElementById('pricing-title').innerText = h.pricingTitle;
                 if(h.contactTitle) document.getElementById('contact-title').innerText = h.contactTitle;
             }
-            
             document.getElementById('footer-company-name').innerText = settings.companyName || 'Kenja AI';
             document.getElementById('footer-logo-symbol').innerText = settings.logoSymbol || 'K';
             document.getElementById('footer-description').innerText = settings.footerDescription || 'AI-Powered Resume Parsing';
@@ -640,11 +627,11 @@
             document.getElementById('footer-email').href = `mailto:${settings.email}`;
             document.getElementById('footer-phone').innerText = settings.phone || '+81 3-5555-5555';
             document.getElementById('footer-copyright').innerText = `© ${new Date().getFullYear()} ${settings.companyName || 'Kenja AI'}. All rights reserved.`;
-            
             if(settings.ctaLink) {
                 document.getElementById('nav-cta').href = settings.ctaLink;
+                document.getElementById('mobile-cta').href = settings.ctaLink;
+                document.getElementById('float-cta-link').href = settings.ctaLink;
             }
-            
             const socialContainer = document.getElementById('footer-social');
             const links = settings.socialLinks;
             let socialHtml = '';
@@ -655,22 +642,35 @@
         }
 
         function renderHero(hero) {
-            const h = hero || {}; 
+            const h = hero || {};
             if(h.badgeText) document.querySelector('#hero-badge .text-content').innerText = h.badgeText;
             const headingEl = document.getElementById('hero-heading');
             headingEl.innerHTML = h.heading || 'Transform Any Resume Into a Standardized Format.';
             const subEl = document.getElementById('hero-subheading');
             subEl.innerHTML = h.subheading || 'AI-driven parsing for speed, accuracy, and enterprise recruitment success.';
             
-            if(h.videoUrl) {
+            // YOUTUBE VIDEO TOGGLE LOGIC
+            const videoContainer = document.getElementById('hero-video');
+            if (h.videoUrl && h.videoUrl.trim() !== '') {
+                // If URL exists, setup the player
                 const youtubeId = getYouTubeId(h.videoUrl);
                 const finalId = youtubeId || 'e_04ZrNroTo'; 
+                
+                // Show container if it was hidden
+                videoContainer.classList.remove('hidden');
+
                 document.getElementById('hero-video-bg').style.backgroundImage = `url('https://img.youtube.com/vi/${finalId}/maxresdefault.jpg')`;
-                const videoContainer = document.getElementById('hero-video');
                 videoContainer.onclick = () => {
                     const embedUrl = `https://www.youtube.com/embed/${finalId}?autoplay=1&mute=0&modestbranding=1&rel=0&iv_load_policy=3&origin=${window.location.origin}`;
                     videoContainer.innerHTML = `<iframe width="100%" height="100%" src="${embedUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="absolute inset-0 w-full h-full rounded-xl md:rounded-2xl"></iframe>`;
                 };
+            } else {
+                // If NO URL, remove the entire video section from the DOM
+                if(videoContainer) videoContainer.remove();
+                
+                // Hide the "Watch Demo" button too since there's no video
+                const watchBtn = document.getElementById('watch-demo-container');
+                if(watchBtn) watchBtn.style.display = 'none';
             }
             
             const statsContainer = document.getElementById('hero-stats');
@@ -682,28 +682,6 @@
             if(h.trustedLogos) {
                 trustedContainer.innerHTML = h.trustedLogos.map(company => `<div class="h-8 w-20 md:w-24 bg-gray-300 rounded flex items-center justify-center text-[10px] md:text-xs text-white font-bold">${company}</div>`).join('');
             }
-        }
-
-        // --- FALLBACK DATA PROVIDERS (If Sanity Fails) ---
-        function getFallbackFeatures() {
-            return [
-                {title: "Universal Parsing", description: "Accepts PDF, Word, Txt, and Images.", iconName: "file-input", gridCols: 2, gridRows: 2, layout: "checklist", checklist: ["Auto-detect Format", "OCR Enabled", "Handwriting Support"]},
-                {title: "Speed Comparison", description: "Stop wasting hours on manual entry.", iconName: "zap", gridCols: 2, gridRows: 2, layout: "speed", speedHuman: "45m", speedAI: "12s"},
-                {title: "RAG Context", description: "Understands 'Java' (Coffee) vs 'Java' (Code).", iconName: "brain-circuit", gridCols: 2, gridRows: 1, layout: "default"},
-                {title: "JSON Export", description: "Instant ATS integration.", iconName: "code-2", gridCols: 1, gridRows: 1, layout: "default"},
-                {title: "Data Privacy", description: "SOC2 Compliant.", iconName: "shield-check", gridCols: 1, gridRows: 1, layout: "default"}
-            ];
-        }
-
-        function getFallbackSettings() {
-            return {
-                companyName: "Kenja AI",
-                logoSymbol: "K",
-                footerDescription: "The world's most accurate resume parser for enterprise.",
-                address: "Moto Akasaka, Tokyo",
-                email: "contact@kenja.com",
-                phone: "+81 3-5413-6267"
-            };
         }
 
         // Start Loading
@@ -723,17 +701,14 @@
             sliderHandle.style.left = `${percentage}%`;
         }
 
-        // Mouse Events
         sliderContainer.addEventListener('mousedown', (e) => { isDragging = true; updateSlider(e.clientX); });
         window.addEventListener('mouseup', () => isDragging = false);
         window.addEventListener('mousemove', (e) => { if (isDragging) { e.preventDefault(); updateSlider(e.clientX); } });
-        
-        // Touch Events
         sliderContainer.addEventListener('touchstart', (e) => { isDragging = true; updateSlider(e.touches[0].clientX); }, { passive: false });
         window.addEventListener('touchend', () => isDragging = false);
         window.addEventListener('touchmove', (e) => { if (isDragging) { e.preventDefault(); updateSlider(e.touches[0].clientX); } }, { passive: false });
 
-        // Intro Animation to show the slider works
+        // Animation
         setTimeout(() => {
             const startX = sliderContainer.getBoundingClientRect().left + (sliderContainer.offsetWidth / 2);
             let wiggle = 0;
@@ -741,39 +716,46 @@
                 wiggle += 0.05;
                 const offset = Math.sin(wiggle) * 40; 
                 updateSlider(startX + offset);
-                if(wiggle > 3) { 
-                    clearInterval(interval);
-                    updateSlider(startX); // Reset to center
-                }
+                if(wiggle > 3) { clearInterval(interval); updateSlider(startX); }
             }, 16);
         }, 1500);
 
-        // Mobile Menu logic
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        menuBtn.addEventListener('click', () => document.getElementById('mobile-menu').classList.toggle('hidden'));
-        
-        // Floating CTA Logic
-        const floatCta = document.getElementById('float-cta');
-        const heroSection = document.getElementById('hero');
-        
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            
-            // Navbar Shadow
-            if (window.scrollY > 20) { 
-                navbar.classList.add('shadow-md'); 
-            } else { 
-                navbar.classList.remove('shadow-md'); 
+        // Mobile menu + navbar shadow + floating CTA
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (menuBtn && mobileMenu) {
+                menuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+
+                // Close when a mobile nav link is clicked
+                document.querySelectorAll('.mobile-link').forEach((link) => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
             }
 
-            // Floating Button Visibility
-            if (window.innerWidth >= 768) {
-                if (window.scrollY > heroSection.offsetHeight) { 
-                    floatCta.classList.remove('translate-y-24', 'opacity-0'); 
-                } else { 
-                    floatCta.classList.add('translate-y-24', 'opacity-0'); 
+            const floatCta = document.getElementById('float-cta');
+            const heroSection = document.getElementById('hero');
+            const navbar = document.getElementById('navbar');
+
+            window.addEventListener('scroll', () => {
+                if (navbar) {
+                    if (window.scrollY > 20) navbar.classList.add('shadow-md');
+                    else navbar.classList.remove('shadow-md');
                 }
-            }
+
+                if (floatCta && heroSection && window.innerWidth >= 768) {
+                    if (window.scrollY > heroSection.offsetHeight) {
+                        floatCta.classList.remove('translate-y-24', 'opacity-0');
+                    } else {
+                        floatCta.classList.add('translate-y-24', 'opacity-0');
+                    }
+                }
+            });
         });
     </script>
 </body>
