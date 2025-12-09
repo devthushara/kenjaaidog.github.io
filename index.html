@@ -113,12 +113,7 @@
         
         <div id="mobile-menu" class="hidden md:hidden bg-[#0B1120] bg-opacity-95 backdrop-blur-xl border-t border-gray-800 absolute w-full shadow-2xl h-screen z-40 transition-all">
             <div class="px-4 pt-4 pb-6 space-y-2" id="mobile-menu-items">
-                <a href="#hero" class="mobile-link block px-4 py-4 text-lg font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-xl transition-colors">Home</a>
-                <a href="#features" class="mobile-link block px-4 py-4 text-lg font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-xl transition-colors">Features</a>
-                <a href="#how-it-works" class="mobile-link block px-4 py-4 text-lg font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-xl transition-colors">How it Works</a>
-                <a href="#pricing" class="mobile-link block px-4 py-4 text-lg font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-xl transition-colors">Pricing</a>
-                <a href="#contact" class="mobile-link block px-4 py-4 text-lg font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-xl transition-colors">Contact</a>
-            </div>
+                </div>
         </div>
     </nav>
 
@@ -166,10 +161,7 @@
                     </div>
                     
                     <div id="hero-stats" class="flex justify-center gap-4 md:gap-16 text-sm md:text-base text-gray-400 flex-wrap px-2">
-                        <div class="flex items-center gap-1 md:gap-2 bg-gray-800/60 backdrop-blur px-3 py-1.5 rounded-lg border border-gray-700"><i data-lucide="zap" class="text-kenja-green w-4 h-4 md:w-5 md:h-5"></i><span>30s Processing</span></div>
-                        <div class="flex items-center gap-1 md:gap-2 bg-gray-800/60 backdrop-blur px-3 py-1.5 rounded-lg border border-gray-700"><i data-lucide="check-circle-2" class="text-kenja-green w-4 h-4 md:w-5 md:h-5"></i><span>No Hallucinations</span></div>
-                        <div class="flex items-center gap-1 md:gap-2 bg-gray-800/60 backdrop-blur px-3 py-1.5 rounded-lg border border-gray-700"><i data-lucide="globe" class="text-kenja-green w-4 h-4 md:w-5 md:h-5"></i><span>Global Formats</span></div>
-                    </div>
+                        </div>
                 </div>
 
                 <div id="hero-video" class="relative max-w-5xl mx-auto rounded-xl md:rounded-2xl shadow-2xl overflow-hidden border-4 md:border-8 border-gray-700/50 bg-gray-900 aspect-video group cursor-pointer scroll-mt-24 md:scroll-mt-32 hidden">
@@ -183,15 +175,25 @@
                 <div class="mt-12 md:mt-16 pt-8 border-t border-gray-700/50">
                     <p class="text-xs md:text-sm font-semibold text-gray-500 uppercase tracking-wider mb-6">Trusted by Recruitment Leaders</p>
                     <div id="trusted-companies" class="flex flex-wrap justify-center gap-4 md:gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-                        <div class="h-8 w-20 md:w-24 bg-white/20 rounded flex items-center justify-center text-[10px] md:text-xs text-white font-bold backdrop-blur-sm">Client A</div>
-                        <div class="h-8 w-20 md:w-24 bg-white/20 rounded flex items-center justify-center text-[10px] md:text-xs text-white font-bold backdrop-blur-sm">Client B</div>
-                        <div class="h-8 w-20 md:w-24 bg-white/20 rounded flex items-center justify-center text-[10px] md:text-xs text-white font-bold backdrop-blur-sm">Client C</div>
-                        <div class="h-8 w-20 md:w-24 bg-white/20 rounded flex items-center justify-center text-[10px] md:text-xs text-white font-bold backdrop-blur-sm">Client D</div>
-                    </div>
+                        </div>
                 </div>
             </div>
             
             <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+        </section>
+
+        <section id="day-as-recruiter" class="py-16 md:py-24 bg-gray-50 border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div id="dar-title-container" class="text-center mb-12 md:mb-16">
+                    <div class="h-10 w-64 bg-gray-200 rounded-full mx-auto skeleton mb-4"></div>
+                    <div class="w-24 h-1 bg-gray-200 mx-auto rounded-full"></div>
+                </div>
+                <div id="dar-cards-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-2xl h-80 skeleton shadow-sm border border-gray-100"></div>
+                    <div class="bg-white rounded-2xl h-80 skeleton shadow-sm border border-gray-100"></div>
+                    <div class="bg-white rounded-2xl h-80 skeleton shadow-sm border border-gray-100"></div>
+                </div>
+            </div>
         </section>
 
         <section id="problem" class="py-16 md:py-24 bg-white">
@@ -444,6 +446,10 @@
         }
 
         const QUERY = `{
+            "dayAsRecruiter": *[_type == "dayAsRecruiter"][0] {
+                heading,
+                cards[] { icon, title, description }
+            },
             "features": *[_type == "feature"] | order(order asc) {
                 title, description, iconName, gridCols, gridRows, theme,
                 layout, checklist, tags, speedHuman, speedAI, chatQuery
@@ -468,21 +474,68 @@
                 const data = await client.fetch(QUERY);
                 if (data) {
                     if(data.siteSettings?.sectionOrder) reorderSections(data.siteSettings.sectionOrder);
+                    
+                    // --- CALL THE NEW RENDER FUNCTION ---
+                    renderDayAsRecruiter(data.dayAsRecruiter);
+
                     if(data.features) renderFeatures(data.features);
                     renderPricing(data.pricing || []); 
                     renderHowItWorks(data.howItWorks || null);
                     if(data.siteSettings) renderSiteSettings(data.siteSettings);
                     if(data.hero) renderHero(data.hero);
                 } else { 
+                    renderDayAsRecruiter(null); // Fallback
                     renderPricing([]); 
                     renderHowItWorks(null);
                 }
             } catch (error) {
                 console.warn("Sanity disconnected. Using static fallback.", error);
+                renderDayAsRecruiter(null); // Fallback
                 renderPricing([]);
                 renderHowItWorks(null);
             } finally {
                 lucide.createIcons();
+            }
+        }
+
+        // --- NEW RENDER FUNCTION ---
+        function renderDayAsRecruiter(data) {
+            const titleContainer = document.getElementById('dar-title-container');
+            const gridContainer = document.getElementById('dar-cards-grid');
+            
+            // Fallback Data (Matches your Screenshot exactly)
+            const fallback = {
+                heading: "Day as a Recruiter",
+                cards: [
+                    { icon: 'mails', title: 'Data Complexity', description: 'Receiving endless formats; PDFs, custom Word docs, Japanese 履歴書, and text-fields that breaks ATS parsing.' },
+                    { icon: 'timer', title: 'Time Consuming Process', description: 'Time consuming process such as manual data entry, translating, formatting, etc.' },
+                    { icon: 'alert-triangle', title: 'High Cost of Error', description: 'Manual data transfer leads to critical errors, missed keywords, and overlooked candidates.' }
+                ]
+            };
+
+            const content = data || fallback;
+
+            // Render Title
+            if (titleContainer) {
+                titleContainer.innerHTML = `
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#0B1120] mb-4">${content.heading}</h2>
+                    <div class="w-24 h-1 bg-kenja-blue mx-auto rounded-full"></div>
+                `;
+            }
+
+            // Render Cards
+            if (gridContainer && content.cards) {
+                gridContainer.innerHTML = content.cards.map(card => `
+                    <div class="bg-white rounded-2xl p-8 shadow-card hover:shadow-hover transition-all duration-300 border border-gray-100 flex flex-col items-center text-center group">
+                        <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <i data-lucide="${card.icon || 'circle'}" class="w-8 h-8 text-[#0B1120]"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">${card.title}</h3>
+                        <p class="text-gray-600 leading-relaxed text-sm md:text-base">
+                            ${card.description}
+                        </p>
+                    </div>
+                `).join('');
             }
         }
 
@@ -499,12 +552,9 @@
             return (match && match[2].length === 11) ? match[2] : null;
         }
 
-        // --- NEW RENDER FUNCTION FOR HOW IT WORKS ---
         function renderHowItWorks(data) {
             const container = document.getElementById('how-it-works-steps');
             const titleEl = document.getElementById('how-it-works-title');
-            
-            // Default Static Data (Fallback)
             const defaults = {
                 title: "Powered by RAG AI Architecture",
                 steps: [
@@ -513,11 +563,8 @@
                     { stepNumber: "3", title: "Generate Standard", description: "LLM generates a structured summary. 98% time saved.", color: "green" }
                 ]
             };
-
             const content = data || defaults;
-            
             if(titleEl) titleEl.innerText = content.title || defaults.title;
-
             if(container) {
                 container.innerHTML = (content.steps || defaults.steps).map(step => {
                     const textColor = step.color === 'green' ? 'text-kenja-green' : 'text-kenja-blue';
@@ -534,17 +581,13 @@
         function renderFeatures(features) {
             const container = document.getElementById('features-grid');
             if(!container) return;
-            
             const colMap = { 1: 'md:col-span-1', 2: 'md:col-span-2', 3: 'md:col-span-3', 4: 'md:col-span-4' };
             const rowMap = { 1: 'md:row-span-1', 2: 'md:row-span-1' };
-
             container.innerHTML = features.map(f => {
                 let rowSpan = rowMap[f.gridRows] || 'md:row-span-1';
                 if(f.title && f.title.includes('Universal')) rowSpan = `md:row-span-1`;
                 const colSpan = colMap[f.gridCols] || 'md:col-span-1';
-                
                 const baseClasses = `${colSpan} ${rowSpan} rounded-2xl shadow-card hover:shadow-hover transition-shadow relative overflow-hidden group`;
-                
                 if(f.layout === 'speed') return `<div class="${baseClasses} bg-kenja-blue text-white p-4 md:p-5"><div class="relative z-10"><div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 md:w-10 md:h-10 bg-white/20 rounded-lg flex items-center justify-center"><i data-lucide="${f.iconName}" class="text-white w-4 h-4 md:w-5 md:h-5"></i></div><h3 class="text-lg md:text-xl font-bold">${f.title}</h3></div><div class="grid grid-cols-2 gap-2 md:gap-3 mt-3"><div class="bg-white/10 p-3 md:p-3 rounded-lg backdrop-blur-sm"><div class="text-[10px] md:text-xs text-blue-200 uppercase mb-1">Human Recruiter</div><div class="text-lg md:text-2xl font-bold">${f.speedHuman || '30 Mins'}</div><div class="text-[10px] md:text-xs text-blue-200">per resume</div></div><div class="bg-kenja-green p-3 md:p-3 rounded-lg shadow-lg transform md:scale-105"><div class="text-[10px] md:text-xs text-white uppercase mb-1">Kenja AI DOG</div><div class="text-lg md:text-2xl font-bold">${f.speedAI || '30 Secs'}</div><div class="text-[10px] md:text-xs text-white">per resume</div></div></div><p class="text-xs md:text-sm mt-3 text-blue-100 text-center font-medium">${f.description}</p></div></div>`;
                 if(f.layout === 'checklist') return `<div class="${baseClasses} bg-white p-4 md:p-5 flex flex-col justify-between"><div class="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity"><i data-lucide="file-check" class="w-32 h-32 md:w-40 md:h-40 text-kenja-blue"></i></div><div><div class="w-10 h-10 md:w-12 md:h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-3 md:mb-4"><i data-lucide="${f.iconName}" class="text-kenja-blue w-5 h-5 md:w-6 md:h-6"></i></div><h3 class="text-xl md:text-2xl font-bold text-kenja-text mb-1 md:mb-2">${f.title}</h3><p class="text-sm md:text-base text-gray-600 leading-relaxed">${f.description}</p></div><div class="mt-4 md:mt-5 bg-gray-50 rounded-lg p-3 md:p-3 border border-gray-100 relative z-10">${(f.checklist || []).map(item => `<div class="flex items-center gap-3 mb-2 last:mb-0"><i data-lucide="check" class="w-4 h-4 text-green-500"></i><span class="text-xs md:text-sm font-semibold text-gray-700">${item}</span></div>`).join('')}</div></div>`;
                 if(f.layout === 'tags') return `<div class="${baseClasses} bg-white p-4 md:p-5 flex flex-col justify-between"><div class="flex justify-between items-start"><div><h3 class="text-lg md:text-xl font-bold text-kenja-text mb-1">${f.title}</h3><p class="text-xs md:text-sm text-gray-600">${f.description}</p></div><div class="w-10 h-10 md:w-12 md:h-12 bg-green-100 rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform shrink-0 ml-2"><i data-lucide="${f.iconName}" class="text-kenja-green w-5 h-5 md:w-6 md:h-6"></i></div></div><div class="flex flex-wrap gap-2 md:gap-2 mt-4">${(f.tags || []).map(tag => `<span class="px-2 py-1 md:px-2 md:py-1 bg-gray-100 rounded-full text-[10px] md:text-xs font-bold border border-gray-200">${tag}</span>`).join('')}</div></div>`;
@@ -556,26 +599,17 @@
         function renderPricing(plans) {
             const container = document.getElementById('pricing-grid');
             if(!container) return;
-
-            // FALLBACK DATA if API fails or returns empty
             const defaultPlans = [
                 { title: 'Starter', price: '¥2,999', period: '/mo', features: ['500 Resumes/mo', 'PDF & Word Support', '1 User Seat'], isPopular: false, buttonText: 'Start Free Trial', stripePriceId: 'price_123_starter' },
                 { title: 'Growth', price: '¥9,999', period: '/mo', features: ['5,000 Resumes/mo', 'All Formats + OCR', '5 User Seats', 'Priority Support'], isPopular: true, buttonText: 'Get Started', stripePriceId: 'price_456_growth' },
                 { title: 'Enterprise', price: 'Custom', period: '', features: ['Unlimited Volume', 'Full ATS Integration', 'SOC2 / GDPR Compliance'], isPopular: false, buttonText: 'Contact Sales', stripePriceId: '' }
             ];
-
             const dataToUse = (plans && plans.length > 0) ? plans : defaultPlans;
-
             container.innerHTML = dataToUse.map(p => {
                 const highlightClass = p.isPopular ? 'ring-2 ring-kenja-blue relative transform md:-translate-y-4 shadow-xl' : 'border border-transparent hover:border-kenja-blue/20 shadow-card';
                 const btnClass = p.isPopular ? 'bg-kenja-blue text-white hover:bg-blue-700' : 'border-2 border-kenja-blue text-kenja-blue hover:bg-blue-50';
-                
-                // Fix: Ensure features exists and is an array
                 const featureList = Array.isArray(p.features) ? p.features : [];
-                
-                // NO STRIPE - Just scroll to contact
                 const clickAction = `onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})"`;
-
                 return `<div class="bg-white rounded-2xl p-6 md:p-8 transition-all ${highlightClass}">${p.isPopular ? '<div class="absolute top-0 right-0 left-0 bg-kenja-blue text-white text-xs font-bold text-center py-1 rounded-t-lg">MOST POPULAR</div>' : ''}<h3 class="text-lg font-semibold text-gray-500 mb-2 ${p.isPopular ? 'mt-2' : ''}">${p.title}</h3><div class="flex items-baseline gap-1 mb-6"><span class="text-3xl md:text-4xl font-bold text-kenja-text">${p.price}</span>${p.period ? `<span class="text-gray-500">${p.period}</span>` : ''}</div><ul class="space-y-3 md:space-y-4 mb-8 text-sm text-gray-600">${featureList.map(feat => `<li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-kenja-green"></i> ${feat}</li>`).join('')}</ul><button ${clickAction} class="w-full py-3 rounded-lg font-semibold transition-colors ${btnClass}">${p.buttonText}</button></div>`;
             }).join('');
         }
@@ -633,39 +667,29 @@
             const subEl = document.getElementById('hero-subheading');
             subEl.innerHTML = h.subheading || 'AI-driven parsing for speed, accuracy, and enterprise recruitment success.';
             
-            // YOUTUBE VIDEO TOGGLE LOGIC
             const videoContainer = document.getElementById('hero-video');
             if (h.videoUrl && h.videoUrl.trim() !== '') {
-                // If URL exists, setup the player
                 const youtubeId = getYouTubeId(h.videoUrl);
                 const finalId = youtubeId || 'e_04ZrNroTo'; 
-                
-                // Show container if it was hidden
                 videoContainer.classList.remove('hidden');
-
                 document.getElementById('hero-video-bg').style.backgroundImage = `url('https://img.youtube.com/vi/${finalId}/maxresdefault.jpg')`;
                 videoContainer.onclick = () => {
                     const embedUrl = `https://www.youtube.com/embed/${finalId}?autoplay=1&mute=0&modestbranding=1&rel=0&iv_load_policy=3&origin=${window.location.origin}`;
                     videoContainer.innerHTML = `<iframe width="100%" height="100%" src="${embedUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="absolute inset-0 w-full h-full rounded-xl md:rounded-2xl"></iframe>`;
                 };
             } else {
-                // If NO URL, remove the entire video section from the DOM
                 if(videoContainer) videoContainer.remove();
-                
-                // Hide the "Watch Demo" button too since there's no video
                 const watchBtn = document.getElementById('watch-demo-container');
                 if(watchBtn) watchBtn.style.display = 'none';
             }
             
             const statsContainer = document.getElementById('hero-stats');
             if(h.stats) {
-                // Update to dark mode style
                 statsContainer.innerHTML = h.stats.map(stat => `<div class="flex items-center gap-1 md:gap-2 bg-gray-800/60 backdrop-blur px-3 py-1.5 rounded-lg border border-gray-700"><i data-lucide="${stat.icon}" class="text-kenja-green w-4 h-4 md:w-5 md:h-5"></i><span>${stat.label}</span></div>`).join('');
             }
             
             const trustedContainer = document.getElementById('trusted-companies');
             if(h.trustedLogos) {
-                 // Update to dark mode style (white text/bg)
                 trustedContainer.innerHTML = h.trustedLogos.map(company => `<div class="h-8 w-20 md:w-24 bg-white/20 rounded flex items-center justify-center text-[10px] md:text-xs text-white font-bold backdrop-blur-sm">${company}</div>`).join('');
             }
         }
@@ -694,7 +718,6 @@
         window.addEventListener('touchend', () => isDragging = false);
         window.addEventListener('touchmove', (e) => { if (isDragging) { e.preventDefault(); updateSlider(e.touches[0].clientX); } }, { passive: false });
 
-        // Animation
         setTimeout(() => {
             const startX = sliderContainer.getBoundingClientRect().left + (sliderContainer.offsetWidth / 2);
             let wiggle = 0;
@@ -706,7 +729,6 @@
             }, 16);
         }, 1500);
 
-        // Mobile menu + navbar shadow + floating CTA
         document.addEventListener('DOMContentLoaded', () => {
             const menuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
@@ -715,8 +737,6 @@
                 menuBtn.addEventListener('click', () => {
                     mobileMenu.classList.toggle('hidden');
                 });
-
-                // Close when a mobile nav link is clicked
                 document.querySelectorAll('.mobile-link').forEach((link) => {
                     link.addEventListener('click', () => {
                         mobileMenu.classList.add('hidden');
@@ -730,7 +750,6 @@
 
             window.addEventListener('scroll', () => {
                 if (navbar) {
-                    // Always Keep Dark Shadow on Scroll
                     if (window.scrollY > 20) navbar.classList.add('shadow-md');
                     else navbar.classList.remove('shadow-md');
                 }
