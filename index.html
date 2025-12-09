@@ -83,10 +83,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16 md:h-20">
                 <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <div class="w-8 h-8 bg-kenja-blue rounded flex items-center justify-center text-white font-bold text-xl overflow-hidden shadow-glow" id="nav-logo-container">
-                        <span id="nav-logo-symbol">K</span>
+                    <div class="w-32 h-10 md:w-40 md:h-12 overflow-hidden bg-transparent" id="nav-logo-container">
+                        <img src="img/logo.svg" alt="Kenja Resume DOG" class="w-full h-full object-contain" id="nav-logo-img">
                     </div>
-                    <span class="font-bold text-lg md:text-xl tracking-tight text-white">Kenja <span class="text-gray-400 font-normal">Resume DOG</span></span>
                 </div>
                 
                 <div class="hidden md:flex items-center space-x-8" id="desktop-menu">
@@ -402,7 +401,11 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
                 <div class="lg:col-span-2">
-                    <div class="flex items-center gap-2 mb-6"><div class="w-8 h-8 bg-kenja-blue rounded flex items-center justify-center text-white font-bold text-lg" id="footer-logo-symbol">K</div><span class="font-bold text-2xl" id="footer-company-name">Kenja AI</span></div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-40 h-10 sm:w-48 sm:h-12 md:w-56 md:h-14 overflow-hidden bg-transparent" id="footer-logo-container">
+                            <img src="img/logo.svg" alt="Kenja Resume DOG" class="w-full h-full object-contain" id="footer-company-name">
+                        </div>
+                    </div>
                     <p class="text-gray-400 text-sm max-w-sm mb-6 leading-relaxed" id="footer-description">Loading...</p>
                     <div class="space-y-3">
                         <div class="flex items-center gap-3 text-sm text-gray-300"><i data-lucide="map-pin" class="w-4 h-4 text-kenja-green"></i><span id="footer-address">Moto Akasaka Building 9F, 1-7-10 Moto Akasaka, Minato-ku, Tokyo 107-0051, Japan</span></div>
@@ -588,11 +591,8 @@
                 document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', () => document.getElementById('mobile-menu').classList.add('hidden')));
             }
             const logoContainer = document.getElementById('nav-logo-container');
-            const logoSymbol = document.getElementById('nav-logo-symbol');
-            if(settings.logoImage) {
-                logoContainer.innerHTML = `<img src="${urlFor(settings.logoImage).width(64).url()}" alt="Logo" class="w-full h-full object-cover">`;
-            } else {
-                logoSymbol.innerText = settings.logoSymbol || 'K';
+            if(settings.logoImage && logoContainer) {
+                logoContainer.innerHTML = `<img src="${urlFor(settings.logoImage).width(64).url()}" alt="Logo" class="w-full h-full object-contain">`;
             }
             if(settings.headings) {
                 const h = settings.headings;
@@ -605,7 +605,6 @@
                 if(h.contactTitle) document.getElementById('contact-title').innerText = h.contactTitle;
             }
             document.getElementById('footer-company-name').innerText = settings.companyName || 'Kenja AI';
-            document.getElementById('footer-logo-symbol').innerText = settings.logoSymbol || 'K';
             document.getElementById('footer-description').innerText = settings.footerDescription || 'AI-Powered Resume Parsing';
             document.getElementById('footer-address').innerText = settings.address || 'Tokyo, Japan';
             document.getElementById('footer-email').innerText = settings.email || 'contact@kenja.com';
